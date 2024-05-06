@@ -1,7 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Sua {
+class Sua
+{
 protected:
     string maHang;
     string tenHang;
@@ -40,7 +41,8 @@ public:
     void setGiaBan(double gia) { giaBan = gia; }
 
     // Hàm nhập thông tin sữa
-    virtual void nhapThongTin() {
+    virtual void nhapThongTin()
+    {
         cout << "Nhap ma hang: ";
         cin >> maHang;
         cout << "Nhap ten hang: ";
@@ -60,7 +62,8 @@ public:
     }
 
     // Hàm xuất thông tin sữa
-    virtual void xuatThongTin() const {
+    virtual void xuatThongTin() const
+    {
         cout << "Ma hang: " << maHang << endl;
         cout << "Ten hang: " << tenHang << endl;
         cout << "Ngay san xuat: " << ngaySanXuat << endl;
@@ -71,7 +74,8 @@ public:
     }
 };
 
-class SuaBot : public Sua {
+class SuaBot : public Sua
+{
 private:
     double trongLuong;
 
@@ -84,19 +88,22 @@ public:
     double getTrongLuong() const { return trongLuong; }
     void setTrongLuong(double tl) { trongLuong = tl; }
 
-    void nhapThongTin() override {
+    void nhapThongTin() override
+    {
         Sua::nhapThongTin();
         cout << "Nhap trong luong: ";
         cin >> trongLuong;
     }
 
-    void xuatThongTin() const override {
+    void xuatThongTin() const override
+    {
         Sua::xuatThongTin();
         cout << "Trong luong: " << fixed << setprecision(2) << trongLuong << endl;
     }
 };
 
-class SuaPhaSan : public Sua {
+class SuaPhaSan : public Sua
+{
 private:
     double dungTich;
 
@@ -109,19 +116,22 @@ public:
     double getDungTich() const { return dungTich; }
     void setDungTich(double dt) { dungTich = dt; }
 
-    void nhapThongTin() override {
+    void nhapThongTin() override
+    {
         Sua::nhapThongTin();
         cout << "Nhap dung tich: ";
         cin >> dungTich;
     }
 
-    void xuatThongTin() const override {
+    void xuatThongTin() const override
+    {
         Sua::xuatThongTin();
         cout << "Dung tich: " << fixed << setprecision(2) << dungTich << endl;
     }
 };
 
-class SuaDac : public Sua {
+class SuaDac : public Sua
+{
 private:
     double trongLuong;
 
@@ -134,18 +144,21 @@ public:
     double getTrongLuong() const { return trongLuong; }
     void setTrongLuong(double tl) { trongLuong = tl; }
 
-    void nhapThongTin() override {
+    void nhapThongTin() override
+    {
         Sua::nhapThongTin();
         cout << "Nhap trong luong: ";
         cin >> trongLuong;
     }
 
-    void xuatThongTin() const override {
+    void xuatThongTin() const override
+    {
         Sua::xuatThongTin();
         cout << "Trong luong: " << fixed << setprecision(2) << trongLuong << endl;
     }
 };
-class KhachHang {
+class KhachHang
+{
 protected:
     string soDienThoai;
     string tenKhachHang;
@@ -172,7 +185,8 @@ public:
     void setLoaiKhachHang(string loai) { loaiKhachHang = loai; }
 
     // Hàm nhập thông tin khách hàng
-    void nhapThongTin() {
+    void nhapThongTin()
+    {
         cout << "Nhap so dien thoai: ";
         cin >> soDienThoai;
         cout << "Nhap ten khach hang: ";
@@ -185,7 +199,8 @@ public:
     }
 
     // Hàm xuất thông tin khách hàng
-    void xuatThongTin() const {
+    void xuatThongTin() const
+    {
         cout << "So dien thoai: " << soDienThoai << endl;
         cout << "Ten khach hang: " << tenKhachHang << endl;
         cout << "Dia chi: " << diaChi << endl;
@@ -193,7 +208,8 @@ public:
     }
 };
 
-class DonHang {
+class DonHang
+{
 private:
     string maDonHang;
     string ngayMuaHang;
@@ -233,7 +249,8 @@ public:
     void setThanhTien(double thanhTien) { this->thanhTien = thanhTien; }
 
     // Hàm nhập thông tin đơn hàng
-    void nhapThongTin() {
+    void nhapThongTin()
+    {
         cout << "Nhap ma don hang: ";
         cin >> maDonHang;
         cout << "Nhap ngay mua hang: ";
@@ -245,11 +262,14 @@ public:
         cout << "Nhap so luong mat hang: ";
         cin >> n;
         cout << "Nhap mat hang va so luong tuong ung:" << endl;
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < n; ++i)
+        {
             string matHang;
             int soLuong;
             cout << "Mat hang " << i + 1 << ": ";
-            cin >> matHang;
+            cin.ignore();
+            getline(cin, matHang);
+            fflush(stdin);
             cout << "So luong: ";
             cin >> soLuong;
             matHangSoLuong[matHang] = soLuong;
@@ -262,22 +282,28 @@ public:
         thanhTien = tongTien - chietKhau;
     }
 
-
     // hàm tính thành tiền
-    void tinhThanhTien() {
+    void tinhThanhTien()
+    {
         double tongTienChuaThue = tongTien - chietKhau;
 
         // Áp dụng khuyến mãi
-        for (const auto& pair : matHangSoLuong) {
+        for (const auto &pair : matHangSoLuong)
+        {
             string matHang = pair.first;
             int soLuong = pair.second;
 
             // Kiểm tra mua nguyên thùng
-            if (matHang == "Sua bot" && soLuong % 6 == 0) {
+            if (matHang == "Sua bot" && soLuong % 6 == 0)
+            {
                 tongTienChuaThue -= tongTienChuaThue * 0.03;
-            } else if (matHang == "Sua pha san" && soLuong % 48 == 0) {
+            }
+            else if (matHang == "Sua pha san" && soLuong % 48 == 0)
+            {
                 tongTienChuaThue -= tongTienChuaThue * 0.05;
-            } else if (matHang == "Sua dac" && soLuong % 6 == 0) {
+            }
+            else if (matHang == "Sua dac" && soLuong % 6 == 0)
+            {
                 tongTienChuaThue -= tongTienChuaThue * 0.05;
             }
         }
@@ -288,12 +314,14 @@ public:
     }
 
     // Hàm xuất thông tin đơn hàng
-    void xuatThongTin() const {
+    void xuatThongTin() const
+    {
         cout << "Ma don hang: " << maDonHang << endl;
         cout << "Ngay mua hang: " << ngayMuaHang << endl;
         cout << "So dien thoai khach hang: " << soDienThoaiKhachHang << endl;
         cout << "Mat hang va so luong:" << endl;
-        for (const auto& pair : matHangSoLuong) {
+        for (const auto &pair : matHangSoLuong)
+        {
             cout << pair.first << ": " << pair.second << endl;
         }
         cout << "Tong tien: " << tongTien << endl;
@@ -302,64 +330,198 @@ public:
     }
 };
 
-class DanhSachSua {
+class DanhSachSua
+{
 private:
-    vector<Sua*> danhSachSua;
+    vector<Sua *> danhSachSua;
 
 public:
+    DanhSachSua(){};
     // Thêm sữa vào danh sách
-    void themSua(Sua* sua) {
+    void themSua(Sua *sua)
+    {
         danhSachSua.push_back(sua);
     }
 
     // Hiển thị danh sách sữa
-    void hienThiDanhSach() const {
+    void hienThiDanhSach() const
+    {
         cout << "Danh sach sua:\n";
-        for (const auto& sua : danhSachSua) {
-            cout << "Ma hang: " << sua->getMaHang() << ", Ten hang: " << sua->getTenHang() << endl;
+        for (const auto &sua : danhSachSua)
+        {
+            sua->xuatThongTin();
+            cout << "================" << endl;
         }
+    }
+
+    void suaSua(string masua, Sua *suaTemp)
+    {
+        for (auto &sua : danhSachSua)
+        {
+            if (sua->getMaHang() == masua)
+            {
+                sua = suaTemp;
+                break;
+            }
+        }
+    }
+
+    void xoaSua(string masua)
+    {
+        for (auto it = danhSachSua.begin(); it != danhSachSua.end(); ++it)
+        {
+            if ((*it)->getMaHang() == masua)
+            {
+                delete *it;
+                danhSachSua.erase(it);
+                break;
+            }
+        }
+    }
+
+    int timkiem(string masua)
+    {
+        int result = 0;
+        for (auto it = danhSachSua.begin(); it != danhSachSua.end(); ++it)
+        {
+            if ((*it)->getMaHang() == masua)
+            {
+                result = 1;
+            }
+        }
+        return result;
     }
 };
 
-class DanhSachKhachHang {
+class DanhSachKhachHang
+{
 private:
     vector<KhachHang> danhSachKhachHang;
 
 public:
+    DanhSachKhachHang(){};
     // Thêm khách hàng vào danh sách
-    void themKhachHang(const KhachHang& khachHang) {
+    void themKhachHang(const KhachHang &khachHang)
+    {
         danhSachKhachHang.push_back(khachHang);
     }
 
     // Hiển thị danh sách khách hàng
-    void hienThiDanhSach() const {
+    void hienThiDanhSach() const
+    {
         cout << "Danh sach khach hang:\n";
-        for (const auto& khachHang : danhSachKhachHang) {
-            cout << "So dien thoai: " << khachHang.getSoDienThoai() << ", Ten khach hang: " << khachHang.getTenKhachHang() << endl;
+        for (const auto &khachHang : danhSachKhachHang)
+        {
+            khachHang.xuatThongTin();
+            cout << "================" << endl;
         }
+    }
+
+    void suaKH(string tenKH, KhachHang a)
+    {
+        for (auto &kh : danhSachKhachHang)
+        {
+            if (kh.getTenKhachHang().compare(tenKH) == 0)
+            {
+                kh = a;
+                break;
+            }
+        }
+    }
+
+    void xoaKH(string tenKH)
+    {
+        int index = 0;
+        for (int i = 0; i < danhSachKhachHang.size(); i++) {
+            if (danhSachKhachHang[i].getTenKhachHang().compare(tenKH) == 0) {
+                index = i;
+                break;
+            }
+        }
+        danhSachKhachHang.erase(danhSachKhachHang.begin() + index);
+        
+    }
+
+    int timkiem(string tenKH)
+    {
+        int result = 0;
+        for (auto it = danhSachKhachHang.begin(); it != danhSachKhachHang.end(); ++it)
+        {
+            if ((*it).getTenKhachHang().compare(tenKH) == 0)
+            {
+                result = 1;
+            }
+        }
+        return result;
     }
 };
 
-class DanhSachDonHang {
+class DanhSachDonHang
+{
 private:
     vector<DonHang> danhSachDonHang;
 
 public:
+    DanhSachDonHang(){};
     // Thêm đơn hàng vào danh sách
-    void themDonHang(const DonHang& donHang) {
+    void themDonHang(const DonHang &donHang)
+    {
         danhSachDonHang.push_back(donHang);
     }
 
     // Hiển thị danh sách đơn hàng
-    void hienThiDanhSach() const {
+    void hienThiDanhSach() const
+    {
         cout << "Danh sach don hang:\n";
-        for (const auto& donHang : danhSachDonHang) {
-            cout << "Ma don hang: " << donHang.getMaDonHang() << ", Ngay mua hang: " << donHang.getNgayMuaHang() << endl;
+        for (const auto &donHang : danhSachDonHang)
+        {
+            donHang.xuatThongTin();
+            cout << "================" << endl;
         }
+    }
+
+    void suaDH(string maDH, DonHang a)
+    {
+        for (auto &sua : danhSachDonHang)
+        {
+            if (sua.getMaDonHang() == maDH)
+            {
+                sua = a;
+                break;
+            }
+        }
+    }
+
+    void xoaDH(string maDH)
+    {
+        int index = 0;
+        for (int i = 0; i < danhSachDonHang.size(); i++)
+        {
+            if (danhSachDonHang[i].getMaDonHang() == maDH)
+            {
+                index = i;
+                break;
+            }
+        }
+        danhSachDonHang.erase(danhSachDonHang.begin() + index);
+    }
+
+    int timkiem(string maDH)
+    {
+        int result = 0;
+        for (auto it = danhSachDonHang.begin(); it != danhSachDonHang.end(); ++it)
+        {
+            if ((*it).getMaDonHang() == maDH)
+            {
+                result = 1;
+            }
+        }
+        return result;
     }
 };
 
-void hienThiMenu() {
+void hienThiMenu()
+{
     cout << "===== MENU =====\n";
     cout << "1. Quan ly danh sach sua\n";
     cout << "2. Quan ly danh sach khach hang\n";
@@ -368,38 +530,335 @@ void hienThiMenu() {
     cout << "================\n";
 }
 
-int main() {
-    SuaBot suaBot;
-    SuaPhaSan suaPhaSan;
-    SuaDac suaDac;
+void hienMenuQuanLySua()
+{
+    cout << "===== MENU QUAN LY SUA =====\n";
+    cout << "1. Them loai sua\n";
+    cout << "2. Hien danh sach sua\n";
+    cout << "3. Sua loai sua\n";
+    cout << "4. Xoa loai sua\n";
+    cout << "0. Thoat\n";
+    cout << "================\n";
+}
 
-    int luaChon;
-    do {
+void hienMenuQuanLyKhachHang()
+{
+    cout << "===== MENU QUAN LY KHACH HANG =====\n";
+    cout << "1. Them khach hang\n";
+    cout << "2. Hien danh sach khach hang\n";
+    cout << "3. Sua khach hang\n";
+    cout << "4. Xoa khach hang\n";
+    cout << "0. Thoat\n";
+    cout << "================\n";
+}
+
+void hienMenuQuanLyDonHang()
+{
+    cout << "===== MENU QUAN LY DON HANG =====\n";
+    cout << "1. Them don hang\n";
+    cout << "2. Hien danh sach don hang\n";
+    cout << "3. Sua don hang\n";
+    cout << "4. Xoa don hang\n";
+    cout << "0. Thoat\n";
+    cout << "================\n";
+}
+
+int main()
+{
+    DanhSachSua *dsSua = new DanhSachSua();
+    DanhSachKhachHang *dsKhachHang = new DanhSachKhachHang();
+    DanhSachDonHang *dsDonHang = new DanhSachDonHang();
+
+    int luaChon, luachonSua, luachonKhachHang, luachonDonHang, loaisua;
+    string masua, madonhang, tenKH;
+    do
+    {
         hienThiMenu();
         cout << "Nhap lua chon cua ban: ";
         cin >> luaChon;
         cin.ignore();
 
-        switch (luaChon) {
-            case 1: {
-                
-                break;
-            }
-            case 2: {
-                
-                break;
-            }
-            case 3: {
-                
-                break;
-            }
-            case 0: {
-                cout << "Ket thuc chuong trinh.\n";
-                break;
-            }
-            default: {
-                cout << "Lua chon khong hop le. Vui long chon lai";
-            }
+        switch (luaChon)
+        {
+        case 1:
+        {
+            do
+            {
+                hienMenuQuanLySua();
+                cout << "Nhap lua chon cua ban: ";
+                cin >> luachonSua;
+                cin.ignore();
+                switch (luachonSua)
+                {
+                case 1:
+                {
+                    do
+                    {
+                        cout << "===== CHON LOAI SUA =====\n";
+                        cout << "1. Sua bot\n";
+                        cout << "2. Sua pha san\n";
+                        cout << "3. Sua dac\n";
+                        cout << "0. Thoat\n";
+                        cout << "================\n";
+                        cout << "Nhap lua chon cua ban: ";
+                        cin >> loaisua;
+                        switch (loaisua)
+                        {
+                        case 1:
+                        {
+                            cin.ignore();
+                            SuaBot *a = new SuaBot();
+                            a->nhapThongTin();
+                            dsSua->themSua(a);
+                            break;
+                        }
+                        case 2:
+                        {
+                            SuaPhaSan *a = new SuaPhaSan();
+                            a->nhapThongTin();
+                            dsSua->themSua(a);
+                            break;
+                        }
+                        case 3:
+                        {
+                            SuaDac *a = new SuaDac();
+                            a->nhapThongTin();
+                            dsSua->themSua(a);
+                            break;
+                        }
+                        case 0:
+                            break;
+                        default:
+                            break;
+                        }
+                    } while (loaisua != 0);
+                }
+                case 2:
+                {
+                    dsSua->hienThiDanhSach();
+                    break;
+                }
+                case 3:
+                {
+                    cout << "===== SUA THONG TIN SUA =====\n";
+                    cout << "Nhap ma sua can thay doi thong tin: ";
+                    cin >> masua;
+                    if (dsSua->timkiem(masua) == 1)
+                    {
+                        do
+                        {
+                            cout << "===== CHON LOAI SUA MUON SUA =====\n";
+                            cout << "1. Sua bot\n";
+                            cout << "2. Sua pha san\n";
+                            cout << "3. Sua dac\n";
+                            cout << "0. Thoat\n";
+                            cout << "================\n";
+                            cout << "Nhap lua chon cua ban: ";
+                            cin >> loaisua;
+                            cin.ignore();
+                            switch (loaisua)
+                            {
+                            case 1:
+                            {
+                                cin.ignore();
+                                SuaBot *a = new SuaBot();
+                                a->nhapThongTin();
+                                dsSua->suaSua(masua, a);
+                                break;
+                            }
+                            case 2:
+                            {
+                                SuaPhaSan *a = new SuaPhaSan();
+                                a->nhapThongTin();
+                                dsSua->suaSua(masua, a);
+                                break;
+                            }
+                            case 3:
+                            {
+                                SuaDac *a = new SuaDac();
+                                dsSua->suaSua(masua, a);
+                                a->nhapThongTin();
+                                break;
+                            }
+                            case 0:
+                                break;
+                            default:
+                                break;
+                            }
+                        } while (loaisua != 0);
+                    }
+                    else
+                    {
+                        cout << "===== KHONG TIM THAY MAT HANG CO MA " << masua << " =====\n";
+                    }
+                    break;
+                }
+                case 4:
+                {
+                    cout << "===== SUA THONG TIN SUA =====\n";
+                    cout << "Nhap ma sua can thay doi thong tin: ";
+                    cin >> masua;
+                    if (dsSua->timkiem(masua) == 1)
+                    {
+                        dsSua->xoaSua(masua);
+                    }
+                    else
+                    {
+                        cout << "===== KHONG TIM THAY MAT HANG CO MA " << masua << " =====\n";
+                    }
+                }
+                case 0:
+                {
+                    break;
+                }
+                default:
+                {
+                    break;
+                }
+                }
+            } while (luachonSua != 0);
+
+            break;
+        }
+        case 2:
+        {
+            do
+            {
+                hienMenuQuanLyKhachHang();
+                cout << "Nhap lua chon cua ban: ";
+                cin >> luachonKhachHang;
+                cin.ignore();
+                switch (luachonKhachHang)
+                {
+                case 1:
+                {
+                    KhachHang a;
+                    a.nhapThongTin();
+                    dsKhachHang->themKhachHang(a);
+                    break;
+                }
+                case 2:
+                {
+                    dsKhachHang->hienThiDanhSach();
+                    break;
+                }
+                case 3:
+                {
+                    cout << "===== SUA THONG TIN KHACH HANG =====\n";
+                    cout << "Nhap ten khach hang can thay doi thong tin: ";
+                    getline(cin, tenKH);
+                    if (dsKhachHang->timkiem(tenKH) == 1)
+                    {
+                        KhachHang temp;
+                        temp.nhapThongTin();
+                        dsKhachHang->suaKH(tenKH, temp);
+                    }
+                    else
+                    {
+                        cout << "===== KHONG TIM THAY KHACH HANG CO TEN " << tenKH << " =====\n";
+                    }
+                    break;
+                }
+                case 4:
+                {
+                    cout << "===== XOA KHACH HANG =====\n";
+                    cout << "Nhap ten khach hang can xoa: ";
+                    getline(cin, tenKH);
+                    if (dsKhachHang->timkiem(tenKH) == 1)
+                    {
+                        dsKhachHang->xoaKH(tenKH);
+                    }
+                    else
+                    {
+                        cout << "===== KHONG TIM THAY KHACH HANG CO TEN " << tenKH << " =====\n";
+                    }
+                }
+                case 0:
+                {
+                    break;
+                }
+                default:
+                {
+                    break;
+                }
+                }
+            } while (luachonKhachHang != 0);
+            break;
+        }
+        case 3:
+        {
+            do
+            {
+                hienMenuQuanLyDonHang();
+                cout << "Nhap lua chon cua ban: ";
+                cin >> luachonDonHang;
+                cin.ignore();
+                switch (luachonDonHang)
+                {
+                case 1:
+                {
+                    DonHang a;
+                    a.nhapThongTin();
+                    dsDonHang->themDonHang(a);
+                    break;
+                }
+                case 2:
+                {
+                    dsDonHang->hienThiDanhSach();
+                    break;
+                }
+                case 3:
+                {
+                    cout << "===== SUA THONG TIN DON HANG =====\n";
+                    cout << "Nhap ma don hang can thay doi thong tin: ";
+                    cin >> madonhang;
+                    if (dsDonHang->timkiem(madonhang) == 1)
+                    {
+                        DonHang temp;
+                        temp.nhapThongTin();
+                        dsDonHang->suaDH(madonhang, temp);
+                    }
+                    else
+                    {
+                        cout << "===== KHONG TIM THAY DON HANG CO MA " << madonhang << " =====\n";
+                    }
+                    break;
+                }
+                case 4:
+                {
+                    cout << "===== XOA DON HANG =====\n";
+                    cout << "Nhap ma don hang can xoa: ";
+                    cin >> madonhang;
+                    if (dsDonHang->timkiem(madonhang) == 1)
+                    {
+                        dsDonHang->xoaDH(madonhang);
+                    }
+                    else
+                    {
+                        cout << "===== KHONG TIM THAY DON HANG CO MA " << madonhang << " =====\n";
+                    }
+                }
+                case 0:
+                {
+                    break;
+                }
+                default:
+                {
+                    break;
+                }
+                }
+            } while (luachonDonHang != 0);
+            break;
+        }
+        case 0:
+        {
+            cout << "Ket thuc chuong trinh.\n";
+            break;
+        }
+        default:
+        {
+            cout << "Lua chon khong hop le. Vui long chon lai";
+        }
         }
     } while (luaChon != 0);
 
